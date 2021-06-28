@@ -1,0 +1,3 @@
+IMPORT USER (tigergraph,69e53f7fda1d57f635589e712bd0ca2aa81c16918d4bf6e3c988034ad99da293)
+IMPORT SECRET (m2n9gocmt9sq10p3tfrabpqneprt2j4s) TO USER tigergraph FOR GRAPH MyGraph
+IMPORT TOKEN (jhupsfvnvghjbbeakd3f38ec9ri73bmc,1627240088) TO SECRET m2n9gocmt9sq10p3tfrabpqneprt2j4s FOR USER tigergraph

@@ -1,0 +1,53 @@
+CREATE GRAPH temporary_global_graph(*)
+set exit_on_error = "false"
+use graph temporary_global_graph
+CREATE LOADING JOB Load_DBExport_jQUSE7 FOR GRAPH temporary_global_graph {
+LOAD "ANY:$sys.data_root/GlobalTypes/Account.csv"
+    TO VERTEX Account VALUES ($"primary_id", $"Name", $"Parentid", $"BillingStreet", $"BillingCity", $"BillingState", $"BillingPostalCode", $"BillingCountry", $"Phone", $"Website", $"Industry", $"AnnualRevenue", $"NumberofEmployees", $"Description", $"AccountOwnerid", $"CreatedDate", $"CreatedByid", $"LastModifiedDate", $"LastModifiedByid", $"LastActivityDate", $"AccountSource") USING SEPARATOR = "", HEADER = "true";
+LOAD "ANY:$sys.data_root/GlobalTypes/Campaign.csv"
+    TO VERTEX Campaign VALUES ($"primary_id", $"Name", $"Parentid", $"Campaign_Type", $"Status", $"StartDate", $"EndDate", $"BudgetedCost", $"ActualCost", $"IsActive", $"Description", $"Number_Of_Leads", $"Number_Of_Converted_Leads", $"Number_Of_Responses", $"Number_Of_Opportunities", $"Number_Of_Won_Opportunities", $"Amount_All_Opportunities", $"Amount_Won_Opportunities", $"Hierarchy_Number_Of_Leads", $"Hierarchy_Number_Of_Converted_Leads", $"Hierarchy_Number_Of_Contacts", $"Hierarchy_Number_Of_Responses", $"Hierarchy_Number_Of_Opportunities", $"Hierarchy_Number_Of_Won_Opportunities", $"Hierarchy_Amount_Won_Opportunities", $"Hierarchy_Amount_All_Opportunities", $"Hierarchy_Budgeted_Cost", $"Hierarchy_Actual_Cost", $"Campaign_Owner_id", $"CreatedDate", $"LastModifiedDate", $"LastModifiedByid") USING SEPARATOR = "", HEADER = "true";
+LOAD "ANY:$sys.data_root/GlobalTypes/Contact.csv"
+    TO VERTEX Contact VALUES ($"primary_id", $"FirstName", $"LastName", $"Phone", $"Email", $"Title", $"Department", $"LeadSource", $"Description", $"Contact_Ownerid", $"Has_Opted_Out_Of_Email", $"DoNotCall", $"CreatedDate", $"CreatedByid", $"LastModifiedDate", $"LastModifiedByid", $"Free_Trial_Start_date", $"Free_Trial_Status", $"Signed_Up_For_Free_Trial_On", $"Dev_edition_Date_Signed_Up", $"Employee_Band", $"Original_Lead_Source") USING SEPARATOR = "", HEADER = "true";
+LOAD "ANY:$sys.data_root/GlobalTypes/Lead.csv"
+    TO VERTEX Lead VALUES ($"primary_id", $"FirstName", $"LastName", $"Title", $"Company", $"City", $"State", $"LeadSource", $"Status", $"Industry", $"Ownerid", $"HasOptedOutOfEmail", $"IsConverted", $"ConvertedDate", $"ConvertedAccountId", $"ConvertedContactId", $"ConvertedOpportunityId", $"IsUnreadByOwner", $"CreatedDate", $"CreatedById", $"LastModifiedDate", $"LastModifiedById", $"LastActivityDate", $"DoNotCall", $"LastTransferDate", $"Free_Trial_License_Key__c", $"Free_Trial_Start_Date__c", $"Signed_up_for_free_trial_on__c", $"Agree_to_FT_LicenseAgreement__c", $"Free_Trial_Project_Notes__c", $"Free_Trial_Follow_Up_Notes__c", $"Started_Test_Drive__c", $"Free_Trial_Status__c", $"LinkedIn_Profile__c", $"Dev_Edition_Agree_to_License_Agreement__c", $"Dev_Edition_Date_Signed_Up__c", $"Free_Trial_Renewed_Date__c", $"Goals_of_Developer_Edition__c", $"Goal_of_Developer_Edition_Other__c", $"Employee_Band__c", $"Are_you_familar_with_Graph_db__c", $"Competitor_Notes__c", $"Use_Graph_Score__c", $"What_s_your_interest_in_TigerGraph__c", $"Interest_Notes__c", $"Interest_Score__c", $"What_capabilities_are_you_looking_for__c", $"Do_you_have_a_timeline__c", $"Contacts_Role__c", $"Title_Rank__c", $"Timeline_Score__c", $"Role_Score__c", $"Title_Score__c", $"How_do_you_want_to_deploy_o__c", $"SQL_SCORE__c", $"Original_Lead_Source__c", $"Event_Notes_L__c", $"DiscoverOrg_EmployeeID__c", $"DiscoverOrg_CompanyID__c") USING SEPARATOR = "", HEADER = "true";
+LOAD "ANY:$sys.data_root/GlobalTypes/CampaignMember.csv"
+    TO VERTEX CampaignMember VALUES ($"primary_id", $"IsDeleted", $"CampaignId", $"LeadId", $"ContactId", $"Status", $"HasResponded", $"IsPrimary", $"CreatedDate", $"CreatedById", $"LastModifiedDate", $"LastModifiedById", $"SystemModstamp", $"FirstRespondedDate") USING SEPARATOR = "", HEADER = "true";
+LOAD "ANY:$sys.data_root/GlobalTypes/Opportunity.csv"
+    TO VERTEX Opportunity VALUES ($"primary_id", $"IsDeleted", $"AccountID", $"IsPrivate", $"Name", $"Description", $"StageName", $"StageSortOrder", $"Amount", $"Probability", $"ExpectedRevenue", $"CloseDate", $"Opportunity_Type", $"NextStep", $"LeadSource", $"IsClosed", $"IsWon", $"ForecastCategory", $"ForecastCategoryName", $"CampaignId", $"HasOpportunityLineItem", $"Pricebook2Id", $"Ownerid", $"CreatedDate", $"CreatedById", $"LastModified", $"LastModifiedById", $"SystemModstamp", $"LastActivityDate", $"LastStageChangeDate", $"FiscalYear", $"FiscalQuarter", $"Budget_Confirmed__c", $"Discovery_Completed__c", $"ROI_Analysis_Completed__c", $"Referral_Partner_Company__c", $"Stage_Moved_to_POC__c", $"Are_you_familiar_with_Graph_db_O__c", $"Competitor_Notes_O__c", $"Contacts_Role_o__c", $"Do_you_have_a_timeline__c", $"How_do_you_want_to_deploy_o__c", $"Interest_Notes_o__c", $"Interest_Score_o__c", $"Role_Score_o__c", $"SQL_SCORE_o__c", $"Timeline_Score_o__c", $"Title_Rank__c", $"Title_Score_o__c", $"Use_Graph_Score_o__c") USING SEPARATOR = "", HEADER = "true";
+LOAD "ANY:$sys.data_root/GlobalTypes/Industry.csv"
+    TO VERTEX Industry VALUES ($"primary_id") USING SEPARATOR = "", HEADER = "true";
+LOAD "ANY:$sys.data_root/GlobalTypes/LeadSource.csv"
+    TO VERTEX LeadSource VALUES ($"primary_id") USING SEPARATOR = "", HEADER = "true";
+LOAD "ANY:$sys.data_root/GlobalTypes/belongs_to.csv"
+    TO EDGE belongs_to VALUES ($"from", $"to") USING SEPARATOR = "", HEADER = "true";
+LOAD "ANY:$sys.data_root/GlobalTypes/converted.csv"
+    TO EDGE converted VALUES ($"from", $"to") USING SEPARATOR = "", HEADER = "true";
+LOAD "ANY:$sys.data_root/GlobalTypes/is_active_as.csv"
+    TO EDGE is_active_as VALUES ($"from", $"to") USING SEPARATOR = "", HEADER = "true";
+LOAD "ANY:$sys.data_root/GlobalTypes/is_part_of.csv"
+    TO EDGE is_part_of VALUES ($"from", $"to") USING SEPARATOR = "", HEADER = "true";
+LOAD "ANY:$sys.data_root/GlobalTypes/Has_Role.csv"
+    TO EDGE Has_Role VALUES ($"from", $"to", $"role", $"id") USING SEPARATOR = "", HEADER = "true";
+LOAD "ANY:$sys.data_root/GlobalTypes/Has.csv"
+    TO EDGE Has VALUES ($"from", $"to") USING SEPARATOR = "", HEADER = "true";
+LOAD "ANY:$sys.data_root/GlobalTypes/Is_Driven_By.csv"
+    TO EDGE Is_Driven_By VALUES ($"from", $"to") USING SEPARATOR = "", HEADER = "true";
+LOAD "ANY:$sys.data_root/GlobalTypes/is_connected_to.csv"
+    TO EDGE is_connected_to VALUES ($"from", $"to") USING SEPARATOR = "", HEADER = "true";
+LOAD "ANY:$sys.data_root/GlobalTypes/belongs_to_industry.csv"
+    TO EDGE belongs_to_industry VALUES ($"from", $"to") USING SEPARATOR = "", HEADER = "true";
+LOAD "ANY:$sys.data_root/GlobalTypes/created_by.csv"
+    TO EDGE created_by VALUES ($"from", $"to") USING SEPARATOR = "", HEADER = "true";
+LOAD "ANY:$sys.data_root/GlobalTypes/is_from.csv"
+    TO EDGE is_from VALUES ($"from", $"to") USING SEPARATOR = "", HEADER = "true";
+LOAD "ANY:$sys.data_root/GlobalTypes/comes_from.csv"
+    TO EDGE comes_from VALUES ($"from", $"to") USING SEPARATOR = "", HEADER = "true";
+LOAD "ANY:$sys.data_root/GlobalTypes/comes_from_the.csv"
+    TO EDGE comes_from_the VALUES ($"from", $"to") USING SEPARATOR = "", HEADER = "true";
+LOAD "ANY:$sys.data_root/GlobalTypes/is_for_the.csv"
+    TO EDGE is_for_the VALUES ($"from", $"to") USING SEPARATOR = "", HEADER = "true";
+}
+RUN LOADING JOB Load_DBExport_jQUSE7
+DROP JOB Load_DBExport_jQUSE7
+set exit_on_error = "true"
+DROP GRAPH temporary_global_graph

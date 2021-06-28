@@ -1,0 +1,665 @@
+{
+  "Cluster Service Status": {
+    "zh-Hans": "群集服务状态"
+  },
+  "Start services": {
+    "zh-Hans": "启动服务"
+  },
+  "Stop services": {
+    "zh-Hans": "停止服务"
+  },
+  "No data": {
+    "zh-Hans": "没有数据"
+  },
+  "Notifications": {
+    "zh-Hans": "通知"
+  },
+  "Sidebar Toggle": {
+    "zh-Hans": "收起 / 展开侧边栏"
+  },
+  "Account": {
+    "zh-Hans": "账户"
+  },
+  "No new notifications": {
+    "zh-Hans": "暂无新通知"
+  },
+  "Sign out": {
+    "zh-Hans": "退出登录"
+  },
+  "Dark theme:": {
+    "zh-Hans": "深色主题："
+  },
+  "On": {
+    "zh-Hans": "开"
+  },
+  "Off": {
+    "zh-Hans": "关"
+  },
+  "Help": {
+    "zh-Hans": "帮助"
+  },
+  "Dashboard": {
+    "zh-Hans": "数据面板"
+  },
+  "User Management": {
+    "zh-Hans": "用户管理"
+  },
+  "License": {
+    "zh-Hans": "软件使用许可"
+  },
+  "Oops! Looks like something was broken.": {
+    "zh-Hans": "系统出现问题。"
+  },
+  "Nodes in Cluster": {
+    "zh-Hans": "集群中的节点"
+  },
+  "Graphs": {
+    "zh-Hans": "图"
+  },
+  "Vertices": {
+    "zh-Hans": "顶点"
+  },
+  "Edges": {
+    "zh-Hans": "边"
+  },
+  "Cluster Monitoring": {
+    "zh-Hans": "集群监控"
+  },
+  "No data is available.": {
+    "zh-Hans": "无可用数据。"
+  },
+  "GSQL Query Performance": {
+    "zh-Hans": "GSQL查询性能"
+  },
+  "My Profile": {
+    "zh-Hans": "我的用户信息"
+  },
+  "Username": {
+    "zh-Hans": "用户名"
+  },
+  "Accessible graph": {
+    "zh-Hans": "可访问的图"
+  },
+  "Proxy group": {
+    "zh-Hans": "代理用户组"
+  },
+  "Password": {
+    "zh-Hans": "密码"
+  },
+  "Graph": {
+    "zh-Hans": "图"
+  },
+  "Roles": {
+    "zh-Hans": "角色"
+  },
+  "Secret Alias": {
+    "zh-Hans": "秘钥别名"
+  },
+  "Alias can only contain alphanumeric and underscore characters": {
+    "zh-Hans": "别名只能包含字母数字和下划线字符"
+  },
+  "Alias cannot be empty": {
+    "zh-Hans": "别名不能为空"
+  },
+  "Secret Value": {
+    "zh-Hans": "秘钥值"
+  },
+  "Make sure to copy the secret now!": {
+    "zh-Hans": "请立即复制秘钥！"
+  },
+  "Click + to add a new secret": {
+    "zh-Hans": "单击+添加新的秘钥"
+  },
+  "Delete secret": {
+    "zh-Hans": "删除秘钥"
+  },
+  "Change password": {
+    "zh-Hans": "修改密码"
+  },
+  "Change Password": {
+    "zh-Hans": "修改密码"
+  },
+  "New password": {
+    "zh-Hans": "新密码"
+  },
+  "Please enter your new password": {
+    "zh-Hans": "请输入新密码"
+  },
+  "Confirm password": {
+    "zh-Hans": "确认密码"
+  },
+  "Passwords do not match": {
+    "zh-Hans": "两次输入的密码不一致"
+  },
+  "CANCEL": {
+    "zh-Hans": "取消"
+  },
+  "CHANGE": {
+    "zh-Hans": "更改"
+  },
+  "All Users": {
+    "zh-Hans": "所有用户"
+  },
+  "Role Management": {
+    "zh-Hans": "角色管理"
+  },
+  "User": {
+    "zh-Hans": "用户"
+  },
+  "Proxy Group": {
+    "zh-Hans": "代理用户组"
+  },
+  "Proxy User": {
+    "zh-Hans": "代理用户"
+  },
+  "Add User": {
+    "zh-Hans": "创建用户"
+  },
+  "Create a new user": {
+    "zh-Hans": "创建一个用户"
+  },
+  "Name": {
+    "zh-Hans": "名称"
+  },
+  "Delete user": {
+    "zh-Hans": "删除用户"
+  },
+  "Add new user": {
+    "zh-Hans": "创建用户"
+  },
+  "ADD": {
+    "zh-Hans": "新增"
+  },
+  "Create a new proxy group": {
+    "zh-Hans": "创建一个代理用户组"
+  },
+  "Add Group": {
+    "zh-Hans": "创建用户组"
+  },
+  "Group Name": {
+    "zh-Hans": "组名"
+  },
+  "Proxy Rule": {
+    "zh-Hans": "代理规则"
+  },
+  "Edit proxy rule": {
+    "zh-Hans": "编辑代理规则"
+  },
+  "Delete proxy group": {
+    "zh-Hans": "删除代理用户组"
+  },
+  "Add new proxy group": {
+    "zh-Hans": "创建代理用户组"
+  },
+  "Group name": {
+    "zh-Hans": "用户组名"
+  },
+  "Attribute name": {
+    "zh-Hans": "属性名称"
+  },
+  "Please enter rule's attribute": {
+    "zh-Hans": "请输入代理规则使用的属性"
+  },
+  "Attribute value": {
+    "zh-Hans": "属性值"
+  },
+  "Please enter rule's value": {
+    "zh-Hans": "请输入属性的值"
+  },
+  "Select a graph": {
+    "zh-Hans": "选择图"
+  },
+  "Search user": {
+    "zh-Hans": "搜索用户"
+  },
+  "Observer": {
+    "zh-Hans": "观察者"
+  },
+  "Query Reader": {
+    "zh-Hans": "查询读者"
+  },
+  "Query Writer": {
+    "zh-Hans": "查询写者"
+  },
+  "Designer": {
+    "zh-Hans": "设计者"
+  },
+  "Admin": {
+    "zh-Hans": "图管理员"
+  },
+  "Global Designer": {
+    "zh-Hans": "全局设计者"
+  },
+  "Super User": {
+    "zh-Hans": "超级用户"
+  },
+  "Sort By": {
+    "zh-Hans": "排序"
+  },
+  "Show By": {
+    "zh-Hans": "展示"
+  },
+  "Alphabet": {
+    "zh-Hans": "字母表"
+  },
+  "Number of roles": {
+    "zh-Hans": "角色数量"
+  },
+  "All": {
+    "zh-Hans": "全部"
+  },
+  "All users": {
+    "zh-Hans": "全部用户"
+  },
+  "Assigned users": {
+    "zh-Hans": "已授权的用户"
+  },
+  "Unassigned users": {
+    "zh-Hans": "未授权的用户"
+  },
+  "Revoke": {
+    "zh-Hans": "撤销权限"
+  },
+  "Grant": {
+    "zh-Hans": "授予权限"
+  },
+  "Overview:": {
+    "zh-Hans": "概览："
+  },
+  "License to:": {
+    "zh-Hans": "软件使用许可："
+  },
+  "Issue time:": {
+    "zh-Hans": "签发时间："
+  },
+  "Expire time:": {
+    "zh-Hans": "过期时间："
+  },
+  "Status:": {
+    "zh-Hans": "状态："
+  },
+  "Types:": {
+    "zh-Hans": "类型："
+  },
+  "Enterprise": {
+    "zh-Hans": "企业版"
+  },
+  "Developer": {
+    "zh-Hans": "开发者版本"
+  },
+  "Unknown Edition": {
+    "zh-Hans": "未知版本"
+  },
+  "Single Graph": {
+    "zh-Hans": "单图"
+  },
+  "Multiple Graphs": {
+    "zh-Hans": "多图"
+  },
+  "Unknown Number of Graphs": {
+    "zh-Hans": "未知图数量"
+  },
+  "Single Node": {
+    "zh-Hans": "单节点"
+  },
+  "Cluster": {
+    "zh-Hans": "集群"
+  },
+  "Unknown Cluster Size": {
+    "zh-Hans": "未知集群大小"
+  },
+  "Applications:": {
+    "zh-Hans": "应用："
+  },
+  "Topology:": {
+    "zh-Hans": "图存储："
+  },
+  "Maximum topology size:": {
+    "zh-Hans": "最大图存储大小："
+  },
+  "Maximum number of graphs:": {
+    "zh-Hans": "最大图数量："
+  },
+  "Maximum number of vertices:": {
+    "zh-Hans": "最大顶点数："
+  },
+  "Maximum number of edges:": {
+    "zh-Hans": "最大边数："
+  },
+  "Machine:": {
+    "zh-Hans": "硬件资源："
+  },
+  "Maximum CPU Core:": {
+    "zh-Hans": "最大CPU核心："
+  },
+  "Maximum physical memory size:": {
+    "zh-Hans": "最大物理内存大小："
+  },
+  "Maximum number of nodes in cluster:": {
+    "zh-Hans": "群集中的最大节点数："
+  },
+  "Runtime:": {
+    "zh-Hans": "运行时："
+  },
+  "Maximum resident set size:": {
+    "zh-Hans": "最大RSS大小："
+  },
+  "Less details...": {
+    "zh-Hans": "更少信息..."
+  },
+  "More details...": {
+    "zh-Hans": "更多信息..."
+  },
+  "Update license:": {
+    "zh-Hans": "更新软件使用许可："
+  },
+  "SELECT FILE": {
+    "zh-Hans": "选择文件"
+  },
+  "UPDATE": {
+    "zh-Hans": "更新"
+  },
+  "Monitor": {
+    "zh-Hans": "监控"
+  },
+  "Logs": {
+    "zh-Hans": "日志"
+  },
+  "Management": {
+    "zh-Hans": "管理"
+  },
+  "Users": {
+    "zh-Hans": "用户"
+  },
+  "Security": {
+    "zh-Hans": "安全"
+  },
+  "Components": {
+    "zh-Hans": "组件"
+  },
+  "Application Server (GUI)": {
+    "zh-Hans": "应用服务器 (GUI)"
+  },
+  "Choose start time": {
+    "zh-Hans": "选择开始时间"
+  },
+  "Choose end time": {
+    "zh-Hans": "选择结束时间"
+  },
+  "Log": {
+    "zh-Hans": "日志"
+  },
+  "Pattern": {
+    "zh-Hans": "模式"
+  },
+  "Nodes": {
+    "zh-Hans": "节点"
+  },
+  "SEARCH": {
+    "zh-Hans": "搜索"
+  },
+  "Searching": {
+    "zh-Hans": "搜索中"
+  },
+  "Hide search input panel": {
+    "zh-Hans": "隐藏搜索输入面板"
+  },
+  "Display": {
+    "zh-Hans": "日志显示"
+  },
+  "Search Result": {
+    "zh-Hans": "搜素结果"
+  },
+  "* No search results found.": {
+    "zh-Hans": "* 没有找到相关结果。"
+  },
+  "* The viewport only supports displaying up to 10000 lines. You can download to view the whole log.": {
+    "zh-Hans": "* 窗口最多支持显示10000行内容。您可以下载查看整个日志。"
+  },
+  "Download": {
+    "zh-Hans": "下载"
+  },
+  "Click add user to get started.": {
+    "zh-Hans": "点击创建用户开始使用。"
+  },
+  "Click add group to get started.": {
+    "zh-Hans": "点击创建用户组开始使用。"
+  },
+  "Refresh": {
+    "zh-Hans": "刷新"
+  },
+  "Enable LDAP": {
+    "zh-Hans": "启用LDAP"
+  },
+  "Hostname": {
+    "zh-Hans": "服务器地址"
+  },
+  "Port": {
+    "zh-Hans": "端口"
+  },
+  "Base domain name": {
+    "zh-Hans": "基础域名"
+  },
+  "Search filter": {
+    "zh-Hans": "搜索过滤"
+  },
+  "Username attribute": {
+    "zh-Hans": "用户名属性"
+  },
+  "Admin domain name": {
+    "zh-Hans": "管理员名称"
+  },
+  "Admin password": {
+    "zh-Hans": "管理员密码"
+  },
+  "Connection type": {
+    "zh-Hans": "连接协议"
+  },
+  "Truststore": {
+    "zh-Hans": "信任库"
+  },
+  "Truststore format": {
+    "zh-Hans": "信任库格式"
+  },
+  "Truststore password": {
+    "zh-Hans": "信任库密码"
+  },
+  "Trust all LDAP server (unsafe)": {
+    "zh-Hans": "信任所有LDAP服务（不安全）"
+  },
+  "Enable SAML-based SSO": {
+    "zh-Hans": "启用基于SAML的SSO"
+  },
+  "Service Provider's hostname": {
+    "zh-Hans": "服务提供商的主机名"
+  },
+  "Service Provider's X509 certificate": {
+    "zh-Hans": "服务提供商的X509证书"
+  },
+  "Service Provider's private key": {
+    "zh-Hans": "服务提供商的私钥"
+  },
+  "Identity Provider's entity ID": {
+    "zh-Hans": "身份提供者的实体ID"
+  },
+  "Identity Provider's SSO URL": {
+    "zh-Hans": "身份提供者的SSO链接"
+  },
+  "Identity Provider's X509 certificate": {
+    "zh-Hans": "身份提供者的X509证书"
+  },
+  "Sign authentication requests before sending to Identity Provider": {
+    "zh-Hans": "发送到身份提供者之前，先对身份验证请求进行签名"
+  },
+  "Require Identity Provider to sign assertions": {
+    "zh-Hans": "要求身份提供者签署声明"
+  },
+  "Require Identity Provider to sign responses": {
+    "zh-Hans": "要求身份提供者签署回复"
+  },
+  "Require Identity Provider to sign metadata": {
+    "zh-Hans": "要求身份提供者签署元数据"
+  },
+  "Signature algorithm": {
+    "zh-Hans": "签名算法"
+  },
+  "Authentication context": {
+    "zh-Hans": "身份验证上下文"
+  },
+  "Upload file": {
+    "zh-Hans": "上传文件"
+  },
+  "Self Signed": {
+    "zh-Hans": "自签名"
+  },
+  "Self-sign Certificate": {
+    "zh-Hans": "自签名证书"
+  },
+  "You must enter a value": {
+    "zh-Hans": "你必须输入一个值"
+  },
+  "Country": {
+    "zh-Hans": "国家"
+  },
+  "State or Province": {
+    "zh-Hans": "州或省"
+  },
+  "Locality": {
+    "zh-Hans": "地区性"
+  },
+  "Organization name": {
+    "zh-Hans": "组织名"
+  },
+  "Organization unit name": {
+    "zh-Hans": "组织单位名称"
+  },
+  "Common name": {
+    "zh-Hans": "通用名"
+  },
+  "DISCARD": {
+    "zh-Hans": "重置"
+  },
+  "APPLY": {
+    "zh-Hans": "应用"
+  },
+  "Allowed CIDR list": {
+    "zh-Hans": "允许的CIDR清单"
+  },
+  "Field name *": {
+    "zh-Hans": "名称 *"
+  },
+  "Field value *": {
+    "zh-Hans": "值 *"
+  },
+  "Click \"+\" on the right to add a new response header.": {
+    "zh-Hans": "单击右侧的“ +”以添加新的响应头。"
+  },
+  "Enable SSL for Nginx": {
+    "zh-Hans": "为Nginx启用SSL"
+  },
+  "SSL certificate": {
+    "zh-Hans": "SSL证书"
+  },
+  "SSL key": {
+    "zh-Hans": "SSL密钥"
+  },
+  "Default query timeout (s)": {
+    "zh-Hans": "默认查询超时（秒）"
+  },
+  "Query return size (Bytes)": {
+    "zh-Hans": "查询返回大小（字节）"
+  },
+  "Backup & Restore": {
+    "zh-Hans": "数据备份与恢复"
+  },
+  "Scheduled Backup": {
+    "zh-Hans": "定时备份"
+  },
+  "Cron Job Configurations": {
+    "zh-Hans": "定时任务设置"
+  },
+  "Minute" : {
+    "zh-Hans": "分"
+  },
+  "Hour" : {
+    "zh-Hans": "时"
+  },
+  "Day of month" : {
+    "zh-Hans": "每月的第几天"
+  },
+  "Month" : {
+    "zh-Hans": "月份"
+  },
+  "Day of week" : {
+    "zh-Hans": "每周的星期几"
+  },
+  "Minute is required.": {
+    "zh-Hans": "'分'不能为空"
+  },
+  "Hour is required.": {
+    "zh-Hans": "'时'不能为空"
+  },
+  "Day of month is required.": {
+    "zh-Hans": "'每月的第几天'不能为空"
+  },
+  "Month is required.": {
+    "zh-Hans": "'月份'不能为空"
+  },
+  "Day of week is required.": {
+    "zh-Hans": "'每周的星期几'不能为空"
+  },
+  "Scheduled Backup Status": {
+    "zh-Hans": "定时备份运行情况"
+  },
+  "Full-text search for scheduled backup status. E.g., type the timestamp in backup name.": {
+    "zh-Hans": "全文搜索，比如：输入备份名中的 UTC 时间戳"
+  },
+  "Back up/Restore": {
+    "zh-Hans": "数据备份与恢复"
+  },
+  "Configurations": {
+    "zh-Hans": "设置"
+  },
+  "Backup tag": {
+    "zh-Hans": "备份标签"
+  },
+  "Please enter backup tag": {
+    "zh-Hans": "请输入备份标签"
+  },
+  "Progress Log": {
+    "zh-Hans": "进度日志"
+  },
+  "Backup/Restoration progress goes here.": {
+    "zh-Hans": "这里是数据备份与恢复的进度"
+  },
+  "BACK UP": {
+    "zh-Hans": "备份数据"
+  },
+  "RESTORE": {
+    "zh-Hans": "恢复数据"
+  },
+  "Manage Backups": {
+    "zh-Hans": "备份管理"
+  },
+  "Backup List": {
+    "zh-Hans": "备份列表"
+  },
+  "This instance/cluster": {
+    "zh-Hans": "该实例/集群"
+  },
+  "Other instances/clusters": {
+    "zh-Hans": "其他实例/集群"
+  },
+  "There are no backups.": {
+    "zh-Hans": "没有备份记录"
+  },
+  "Copy backup tag to clipboard": {
+    "zh-Hans": "复制备份标签到剪贴板"
+  },
+  "Delete the backup": {
+    "zh-Hans": "删除备份记录"
+  },
+  "Removal progress goes here.": {
+    "zh-Hans": "这里是移除备份的进度"
+  }
+}
