@@ -96,19 +96,32 @@ def zip2structure(filepath):
     # move queries and jobs
     DBImportExport_code = ''
     with open(DBImportExport_location) as handler:
-        DBImportExport_code = handler.read()
+        DBImportExport_code = handler.read().replace('set exit_on_error = "true"', '').replace('set exit_on_error = "false"', '')
     DBImportExport_code = DBImportExport_code.split('\n')
-    indicies = []
+    indicies_queries = []
+    indicies_jobs = []
+    jobs = []
     queries = []
     for element in DBImportExport_code:
         if 'CREATE QUERY' in element.upper():
-            indicies.append(DBImportExport_code.index(element))
+            indicies_queries.append(DBImportExport_code.index(element))
+        if 'CREATE LOADING JOB' in element.upper():
+            indicies_jobs.append(DBImportExport_code.index(element))
 
-    for i in range(len(indicies) - 1):
-        pdebug((indicies[i], indicies[i+1]), 'e')
-        queries.append("\n".join(DBImportExport_code[indicies[i] : indicies[i+1]]))
+    for i in range(len(indicies_queries) - 1):
+        # pdebug((indicies[i], indicies[i+1]), 'e')
+        queries.append("\n".join(DBImportExport_code[indicies_queries[i] : indicies_queries[i+1]]))
+    queries.append("\n".join(DBImportExport_code[indicies_queries[len(indicies_queries) - 1]:]))
 
-    queries.append("\n".join(DBImportExport_code[indicies[len(indicies) - 1]:]))
+    for i in range(len(indicies_jobs) - 1):
+        # pdebug((indicies[i], indicies[i+1]), 'e')
+        jobs.append("\n".join(DBImportExport_code[indicies_jobs[i] : indicies_jobs[i+1]]))
+    jobs.append("\n".join(DBImportExport_code[indicies_jobs[-1]: indicies_queries[0]]))
+
+
+    for i,job in enumerate(jobs):
+        print(i,'\n', job)
+
 
         
 
