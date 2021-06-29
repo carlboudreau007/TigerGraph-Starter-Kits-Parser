@@ -1,7 +1,5 @@
 import os
 import zipfile
-from collections import deque
-from pathlib import Path
 
 DEBUG = 'e'
 
@@ -35,7 +33,7 @@ def zip2structure(filepath):
     graph_name = ''
     for file in os.listdir(os.path.join(os.getcwd(), unzipped_raw)):
         if file.startswith('DBImportExport'):
-            DBImportExport_location = os.path.join(os.getcwd(), unzipped_raw, file)
+            DBImportExport_location = os.path.join(unzipped_raw, file)
     with open(DBImportExport_location) as handler:
         first_line = handler.readline()
         graph_name = first_line[len('CREATE GRAPH') + 1 : first_line.find('(')]
@@ -74,18 +72,10 @@ def zip2structure(filepath):
         line[0] = 'ADD'
         schema_lines[i] = ' '.join(line)
 
-    # Path("{}\db_scripts\schema\schema.gsql".format(zip_name)).touch()
-
-    overwrite_schema ="""CREATE GRAPH {graphName} ()
-    CREATE SCHEMA_CHANGE JOB change_schema_of_{graphName} FOR GRAPH {graphName} {{""".format(graphName=graph_name)
+    overwrite_schema ="""CREATE GRAPH {graphName} ()\nCREATE SCHEMA_CHANGE JOB change_schema_of_{graphName} FOR GRAPH {graphName} {{\n""".format(graphName=graph_name)
     for line in schema_lines:
-        overwrite_schema += "\n\t\t"
-        overwrite_schema += line
-    overwrite_schema += """
-    }}
-    RUN SCHEMA_CHANGE JOB change_schema_of_{graphName}
-    DROP JOB change_schema_of_{graphName}
-    """.format(graphName=graph_name)
+        overwrite_schema += ('\t' + line + '\n')
+    overwrite_schema += """}}\nRUN SCHEMA_CHANGE JOB change_schema_of_{graphName}\nDROP JOB change_schema_of_{graphName}""".format(graphName=graph_name)
     pdebug(overwrite_schema,'i')
     handler.close()
 
@@ -93,15 +83,13 @@ def zip2structure(filepath):
     handler.write(overwrite_schema)
     handler.close()
 
-    # move queries and jobs
+    # move queries and jobs into respective files
     DBImportExport_code = ''
     with open(DBImportExport_location) as handler:
         DBImportExport_code = handler.read().replace('set exit_on_error = "true"', '').replace('set exit_on_error = "false"', '')
     DBImportExport_code = DBImportExport_code.split('\n')
-    indicies_queries = []
-    indicies_jobs = []
-    jobs = []
-    queries = []
+    indicies_queries, queries = [], []
+    indicies_jobs, jobs = [], []
     for element in DBImportExport_code:
         if 'CREATE QUERY' in element.upper():
             indicies_queries.append(DBImportExport_code.index(element))
@@ -109,74 +97,32 @@ def zip2structure(filepath):
             indicies_jobs.append(DBImportExport_code.index(element))
 
     for i in range(len(indicies_queries) - 1):
-        # pdebug((indicies[i], indicies[i+1]), 'e')
         queries.append("\n".join(DBImportExport_code[indicies_queries[i] : indicies_queries[i+1]]))
     queries.append("\n".join(DBImportExport_code[indicies_queries[len(indicies_queries) - 1]:]))
 
     for i in range(len(indicies_jobs) - 1):
-        # pdebug((indicies[i], indicies[i+1]), 'e')
         jobs.append("\n".join(DBImportExport_code[indicies_jobs[i] : indicies_jobs[i+1]]))
     jobs.append("\n".join(DBImportExport_code[indicies_jobs[-1]: indicies_queries[0]]))
 
 
-    for i,job in enumerate(jobs):
-        print(i,'\n', job)
+    jobs_location_dest = os.path.join(unzipped_dirpath, 'db_scripts', 'jobs')
+    for i, job in enumerate(jobs):
+        first_line = DBImportExport_code[indicies_jobs[i]]
+        _, sep, sub2 = first_line.partition('load_job_')
+        job_name = sep + sub2[:sub2.find('_')] + '.gsql'
+        with open(os.path.join(jobs_location_dest, job_name), 'w') as handler:
+            handler.write(job)
 
+    queries_location_dest = os.path.join(unzipped_dirpath, 'db_scripts', 'queries')
+    for i, query in enumerate(queries):
+        first_line = DBImportExport_code[indicies_queries[i]]
+        query_name = first_line[len('CREATE GRAPH') + 1 : first_line.find('(')] + '.gsql'
+        with open(os.path.join(queries_location_dest, query_name), 'w') as handler:
+            handler.write(query)
 
-        
-
-
-
-
-def temp():
-
-    # get graph name
-    handler = open('Customer-360-Attribution-and-Engagement-Graph_raw\global.gsql', 'w+')
-    schema_lines = [line.rstrip('\n') for line in handler]
-    for i in range(len(schema_lines)):
-        schema_lines[i] += ';'
-        line = schema_lines[i].split()
-        line[0] = 'ADD'
-        schema_lines[i] = ' '.join(line)
-    print(schema_lines)
-    # overwrite_schema ='''CREATE GRAPH {graphName} ()
-    # CREATE SCHEMA_CHANGE JOB change_schema_of_{graphName} FOR GRAPH {graphName} {{
-    # {schema}
-    # }}
-    # RUN SCHEMA_CHANGE JOB change_schema_of_{graphName}
-    # DROP JOB change_schema_of_{graphName}
-    # '''.format(graphName='MyGraph', schema=schema_lines)
-    # handler.write(overwrite_schema)
-    # handler.close()
-    
-    # queries = jobs = []
-    # DBImportExport_location =  ''
-    # query_start = query_finish = 0
-    # loading_job_start = loading_job_finish = 0
-
-    # for file in os.listdir(os.getcwd()):
-    #     if file.startswith('DBImportExport'):
-    #         DBImportExport_location = os.path.join(os.getcwd(), file)
-    
-    # handler = open(DBImportExport_location, 'r')
-    # code_lines = [line.rstrip('\n') for line in handler]
-    # handler.close()
-    # for i in range(len(code_lines) - 1):
-    #     words = code_lines[i].split()
-    #     if words[0] == 'CREATE':
-    #         if words[1] == 'QUERY':
-    #             break
-    #         if words[1] == 'LOADING' and words[2] == 'JOB':
-    #             break
-    #         if words[1] == 'GRAPH':
-    #             break
-        
-    #     print(words)
-        
 
 def main():
     zip2structure("Customer-360-Attribution-and-Engagement-Graph.zip")
-    # temp()
 
 if __name__ == "__main__":
     main()
