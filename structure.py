@@ -1,5 +1,6 @@
 import os
 import zipfile
+import re
 
 DEBUG = 'e'
 
@@ -91,9 +92,9 @@ def zip2structure(filepath):
     indicies_queries, queries = [], []
     indicies_jobs, jobs = [], []
     for element in DBImportExport_code:
-        if 'CREATE QUERY' in element.upper():
+        if 'CREATE QUERY' in element:
             indicies_queries.append(DBImportExport_code.index(element))
-        if 'CREATE LOADING JOB' in element.upper():
+        if 'CREATE LOADING JOB' in element:
             indicies_jobs.append(DBImportExport_code.index(element))
 
     for i in range(len(indicies_queries) - 1):
@@ -108,9 +109,13 @@ def zip2structure(filepath):
     jobs_location_dest = os.path.join(unzipped_dirpath, 'db_scripts', 'jobs')
     for i, job in enumerate(jobs):
         first_line = DBImportExport_code[indicies_jobs[i]]
+
         _, sep, sub2 = first_line.partition('load_job_')
-        job_name = sep + sub2[:sub2.find('_')] + '.gsql'
-        with open(os.path.join(jobs_location_dest, job_name), 'w') as handler:
+        job_name = sub2[:sub2.find('_')]
+        job_file_name = sep + job_name + '.gsql'
+        job = re.sub('load_job_[^\s]*', job_name + 'Job', job)
+
+        with open(os.path.join(jobs_location_dest, job_file_name), 'w') as handler:
             handler.write(job)
 
     queries_location_dest = os.path.join(unzipped_dirpath, 'db_scripts', 'queries')
