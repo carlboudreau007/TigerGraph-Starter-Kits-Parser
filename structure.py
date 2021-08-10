@@ -11,11 +11,24 @@ def pdebug(value,level):
 
 def zip2structure(filepath):
     # name of zip
-    zip_name = os.path.splitext(filepath)[0]
-    unzipped_raw = os.path.join(os.getcwd(), zip_name+'_raw')
+    zip_name = filepath.split('/')[-1].replace('.zip','',1)
+
+    # make necessary folders
+    raw_starter_kits = os.path.join(os.getcwd(), 'raw_starter_kits')
+    if not os.path.exists(raw_starter_kits):
+        os.mkdir(raw_starter_kits)
+
+    starter_kits = os.path.join(os.getcwd(), 'starter_kits')
+    if not os.path.exists(starter_kits):
+        os.mkdir(starter_kits)
+
+    unzipped_raw = os.path.join(raw_starter_kits, zip_name+'_raw')
+    # unzip into unzipped_raw
+    with zipfile.ZipFile(filepath, 'r') as zip:
+        zip.extractall(unzipped_raw)
 
     # make structure
-    unzipped_dirpath = os.path.join(os.getcwd(), zip_name)
+    unzipped_dirpath = os.path.join(starter_kits, zip_name)
     if not os.path.exists(unzipped_dirpath):
         os.mkdir(unzipped_dirpath)
         with open(os.path.join(unzipped_dirpath, 'README.md'), 'w') as handler:
@@ -25,9 +38,6 @@ def zip2structure(filepath):
         for subdir in ['jobs', 'queries', 'schemas','UDFs']:
             os.mkdir(os.path.join(unzipped_dirpath,'db_scripts',subdir))
 
-    # unzip into unzipped_raw
-    with zipfile.ZipFile(filepath, 'r') as zip:
-        zip.extractall(unzipped_raw)
 
     # get graph name
     DBImportExport_location = ''
@@ -37,27 +47,21 @@ def zip2structure(filepath):
             DBImportExport_location = os.path.join(unzipped_raw, file)
     with open(DBImportExport_location) as handler:
         first_line = handler.readline()
+        # graph_name = re.match(r'CREATE GRAPH [^\s]* ?\(', first_line).group(0)[len('CREATE GRAPH') + 1 : first_line.find('(')]
         graph_name = first_line[len('CREATE GRAPH') + 1 : first_line.find('(')]
-
-
-
-
     # move data
     data_location_src = os.path.join(unzipped_raw, 'GlobalTypes')
-    data_location_dest = os.path.join(unzipped_dirpath, 'data') 
-    for file in os.listdir(data_location_src):
-        if file.endswith('.csv'):
-            os.rename(os.path.join(data_location_src, file), os.path.join(data_location_dest, file))
+    data_location_dest = os.path.join(unzipped_dirpath, 'data')
+    with zipfile.ZipFile(os.path.join(data_location_dest,'data.zip'), 'w') as datazip: 
+        for file in os.listdir(data_location_src):
+            if file.endswith('.csv'):
+                # os.rename(os.path.join(data_location_src, file), os.path.join(data_location_dest, file))
+                datazip.write(os.path.join(data_location_src, file), file)
     
     # move UDFs ?
     UDFs_location_src = os.path.join(unzipped_raw, 'ExprFunctions.hpp')
     UDFs_location_dest = os.path.join(unzipped_dirpath, 'db_scripts', 'UDFs', 'ExprFunctions.hpp')
     os.rename(UDFs_location_src, UDFs_location_dest)
-
-    # # move loading jobs
-    # jobs_location_src = os.path.join(unzipped_raw, 'run_loading_jobs.gsql')
-    # jobs_location_dest = os.path.join(unzipped_dirpath, 'db_scripts', 'jobs', 'run_loading_jobs.gsql')
-    # os.rename(jobs_location_src, jobs_location_dest)
 
     # move/modify schema 
     schema_location_src = os.path.join(unzipped_raw, 'global.gsql')
@@ -73,10 +77,10 @@ def zip2structure(filepath):
         line[0] = 'ADD'
         schema_lines[i] = ' '.join(line)
 
-    overwrite_schema ="""CREATE GRAPH {graphName} ()\nCREATE SCHEMA_CHANGE JOB change_schema_of_{graphName} FOR GRAPH {graphName} {{\n""".format(graphName=graph_name)
+    overwrite_schema =f'CREATE GRAPH {graph_name} ()\nCREATE SCHEMA_CHANGE JOB change_schema_of_{graph_name} FOR GRAPH {graph_name} {{\n'
     for line in schema_lines:
         overwrite_schema += ('\t' + line + '\n')
-    overwrite_schema += """}}\nRUN SCHEMA_CHANGE JOB change_schema_of_{graphName}\nDROP JOB change_schema_of_{graphName}""".format(graphName=graph_name)
+    overwrite_schema += f'}}\nRUN SCHEMA_CHANGE JOB change_schema_of_{graph_name}\nDROP JOB change_schema_of_{graph_name}'
     pdebug(overwrite_schema,'i')
     handler.close()
 
@@ -97,13 +101,17 @@ def zip2structure(filepath):
         if 'CREATE LOADING JOB' in element:
             indicies_jobs.append(DBImportExport_code.index(element))
 
-    for i in range(len(indicies_queries) - 1):
-        queries.append("\n".join(DBImportExport_code[indicies_queries[i] : indicies_queries[i+1]]))
-    queries.append("\n".join(DBImportExport_code[indicies_queries[len(indicies_queries) - 1]:]))
-
-    for i in range(len(indicies_jobs) - 1):
-        jobs.append("\n".join(DBImportExport_code[indicies_jobs[i] : indicies_jobs[i+1]]))
-    jobs.append("\n".join(DBImportExport_code[indicies_jobs[-1]: indicies_queries[0]]))
+    if len(indicies_queries) > 0:
+        for i in range(len(indicies_queries) - 1):
+            queries.append("\n".join(DBImportExport_code[indicies_queries[i] : indicies_queries[i+1]]))
+        queries.append("\n".join(DBImportExport_code[indicies_queries[-1]:]))
+    if len(indicies_jobs) > 0:
+        for i in range(len(indicies_jobs) - 1):
+            jobs.append("\n".join(DBImportExport_code[indicies_jobs[i] : indicies_jobs[i+1]]))
+        if len(indicies_queries) > 0:
+            jobs.append("\n".join(DBImportExport_code[indicies_jobs[-1]: indicies_queries[0]]))
+        else:
+            jobs.append("\n".join(DBImportExport_code[indicies_jobs[-1]:]))
 
 
     jobs_location_dest = os.path.join(unzipped_dirpath, 'db_scripts', 'jobs')
@@ -127,7 +135,12 @@ def zip2structure(filepath):
 
 
 def main():
-    zip2structure("Customer-360-Attribution-and-Engagement-Graph.zip")
+    zipped_starter_kits_path = os.path.join(os.getcwd(), 'zipped_starter_kits')
+    for item in os.listdir(zipped_starter_kits_path):
+        if item.endswith('.zip'):
+            current_zip = os.path.join(zipped_starter_kits_path, item)
+            zip2structure(current_zip)
+
 
 if __name__ == "__main__":
     main()
