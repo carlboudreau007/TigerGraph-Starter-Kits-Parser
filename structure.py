@@ -1,6 +1,8 @@
 import os
 import zipfile
 import re
+import gzip
+import shutil
 
 DEBUG = 'e'
 
@@ -49,6 +51,7 @@ def zip2structure(filepath):
         first_line = handler.readline()
         # graph_name = re.match(r'CREATE GRAPH [^\s]* ?\(', first_line).group(0)[len('CREATE GRAPH') + 1 : first_line.find('(')]
         graph_name = first_line[len('CREATE GRAPH') + 1 : first_line.find('(')]
+    
     # move data
     data_location_src = os.path.join(unzipped_raw, 'GlobalTypes')
     data_location_dest = os.path.join(unzipped_dirpath, 'data')
@@ -57,6 +60,9 @@ def zip2structure(filepath):
             if file.endswith('.csv'):
                 # os.rename(os.path.join(data_location_src, file), os.path.join(data_location_dest, file))
                 datazip.write(os.path.join(data_location_src, file), file)
+        with open(os.path.join(data_location_dest,'data.zip'), 'rb') as infile:
+            with gzip.open(os.path.join(data_location_dest,'data.zip.gz'), 'wb') as outfile:
+                shutil.copyfileobj(infile, outfile)
     
     # move UDFs ?
     UDFs_location_src = os.path.join(unzipped_raw, 'ExprFunctions.hpp')
